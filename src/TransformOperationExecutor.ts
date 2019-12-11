@@ -37,11 +37,11 @@ export class TransformOperationExecutor {
             (value as any[]).forEach((subValue, index) => {
                 const subSource = source ? source[index] : undefined;
                 if (!this.isCircular(subValue, level)) {
-                    const value = this.transform(subSource, subValue, targetType, undefined, subValue instanceof Map, level + 1);
+                    const transformedValue = this.transform(subSource, subValue, targetType, undefined, subValue instanceof Map, level + 1);
                     if (newValue instanceof Set) {
-                        newValue.add(value);
+                        newValue.add(transformedValue);
                     } else {
-                        newValue.push(value);
+                        newValue.push(transformedValue);
                     }
                 } else if (this.transformationType === "classToClass") {
                     if (newValue instanceof Set) {
